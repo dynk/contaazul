@@ -1,10 +1,12 @@
 public class ReceiverDefault implements IReceiver {
-    public boolean isValidMessage(String message) {
-        if(message.length() == 0){
+    private String _message;
+    public boolean isValidMessage() {
+        int size = _message.length();
+        if(size == 0){
             return false;
         }
-        for(int i = 0; i<message.length();i++){
-            Character comp = message.toLowerCase().charAt(i);
+        for(int i = 0; i<size;i++){
+            Character comp = _message.toLowerCase().charAt(i);
             if(comp != 'l' && comp != 'r' && comp != 'm'){
                 return false;
             }
@@ -12,7 +14,13 @@ public class ReceiverDefault implements IReceiver {
         return true;
     }
 
-    public String[] translateMessage() {
-        return new String[0];
+    public void setReceivedMessage(String message) {
+        _message = message;
     }
+
+    public String getReceivedMessage() {
+        return _message;
+    }
+
+
 }

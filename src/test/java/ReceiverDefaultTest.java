@@ -3,8 +3,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ReceiverDefaultTest {
-
     ReceiverDefault _receiver = new ReceiverDefault();
+
+    @Test
+    public void setAndGetReceivedMessage() throws Exception {
+        String message = "LMLRLM";
+        _receiver.setReceivedMessage(message);
+        assertEquals(message,_receiver.getReceivedMessage());
+    }
+
+
 
     @Test
     public void isValidMessage() throws Exception {
@@ -16,11 +24,14 @@ public class ReceiverDefaultTest {
         invalidMessages[0] = "";
         invalidMessages[1] = "k";
         invalidMessages[2] = "MLMLMLMLKMLRLMR";
+
         for(String m : validMessages){
-            assertTrue(_receiver.isValidMessage(m));
+            _receiver.setReceivedMessage(m);
+            assertTrue(_receiver.isValidMessage());
         }
         for(String m : invalidMessages){
-            assertFalse(_receiver.isValidMessage(m));
+            _receiver.setReceivedMessage(m);
+            assertFalse(_receiver.isValidMessage());
         }
 
     }

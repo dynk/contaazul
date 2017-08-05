@@ -1,0 +1,45 @@
+public class Translator {
+    public Translator(){};
+    public String coordXY2string(Coordinates coord){
+        int[] xy = coord.getXYPosition();
+        String orientation = translateOrientation(coord.get_orientation());
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        sb.append(xy[0]);
+        sb.append(", ");
+        sb.append(xy[1]);
+        sb.append(", ");
+        sb.append(orientation);
+        sb.append(")");
+
+        return sb.toString();
+    }
+
+    public String translateOrientation(int orientation){
+        String result;
+        int value = orientation%360;
+        switch(value) {
+            case 0 :
+                result = "E";
+                break; // optional
+
+            case 90 :
+            case -270 :
+                result = "N";
+                break;
+            case 180 :
+            case -180 :
+                result = "W";
+                break;
+            case 270 :
+            case -90 :
+                result = "S";
+                break;
+
+            default :
+                result = "N";
+        }
+        return result;
+    }
+}
