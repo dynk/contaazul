@@ -12,17 +12,22 @@ public class Coordinates {
         _x = x;
         _y = y;
     }
-    public void set_orientation(int orientation){
+    public void setOrientation(int orientation){
         _orientation = orientation;
     }
 
-    public int get_orientation(){
+    public int getOrientation(){
         return _orientation;
     }
 
     public int[] getXYPosition() {
         int[] xy = {_x,_y};
         return xy;
+    }
+    public void incrementXY(int x, int y){
+        _x = _x + x;
+        _y = _y + y;
+
     }
 }
 

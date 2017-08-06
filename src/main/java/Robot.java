@@ -32,9 +32,28 @@ public class Robot {
 
         return "teste";
     }
-    public String processRequest(){
-
-        return "teste";
+    public void processRequest()throws InvalidInput{
+        Coordinates desiredPosition;
+        Coordinates currentPosition = _gps;
+        int incX;
+        int incY;
+        for(Moves m:_movements){
+            if(m.getStep() > 0){
+                incX = (int)Math.round(Math.sin(Math.toRadians(_gps.getOrientation())));
+                incY = (int)Math.round(Math.cos(Math.toRadians(_gps.getOrientation())));
+                desiredPosition = currentPosition;
+                desiredPosition.incrementXY(incX,incY);
+                if(_surface.isLegalPosition(desiredPosition)){
+                    throw new InvalidInput("400 Bad Request");
+                }else{
+                    currentPosition = desiredPosition;
+                }
+            }
+            if(m.getRotation() != 0){
+                _gps.setOrientation(m.getRotation());
+            }
+        }
+        _gps = currentPosition;
     }
 //    public String printPosition(){
 //
