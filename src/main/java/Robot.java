@@ -24,28 +24,6 @@ public class Robot {
     public void translateMessage(){
         _movements = _translator.string2moves(_receiver.getReceivedMessage());
     }
-    public String executeAll(String message){
-        try{
-            listenMessage(message);
-            isValidMessage();
-            translateMessage();
-            processRequest();
-            return _translator.coordXY2string(_gps);
-        }catch (Exception e){
-            return "400 Bad Request";
-        }
-
-
-//        listenMessage(message);
-//        if(!isValidMessage()){
-//            throw new InvalidInput("400 Bad Request");
-//        }
-//        translateMessage(message);
-//        processRequest();
-//
-//
-//        return "teste";
-    }
     public void processRequest() throws InvalidInput{
         Coordinates desiredPosition;
         Coordinates currentPosition = new Coordinates(_gps);
@@ -69,12 +47,22 @@ public class Robot {
         }
         _gps = new Coordinates(currentPosition);
     }
+    public String executeAll(String message){
+        try{
+            listenMessage(message);
+            isValidMessage();
+            translateMessage();
+            processRequest();
+            return _translator.coordXY2string(_gps);
+        }catch (Exception e){
+            return "400 Bad Request";
+        }
+
+    }
+
 
     public String getPosition(){
         return _translator.coordXY2string(_gps);
     }
-//    public String printPosition(){
-//
-//    }
-//
+
 }
