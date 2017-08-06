@@ -10,6 +10,39 @@ public class TranslatorTest {
     Translator trans = new Translator();
 
     @Test
+    public void string2moves() throws Exception {
+        HashMap<Character,Moves> movesMap = new HashMap();
+        movesMap.put('M', new Moves(1,0));
+        movesMap.put('L', new Moves(0,90));
+        movesMap.put('R', new Moves(0,-90));
+
+        String message = "MMM";
+        Moves[] moves = trans.string2moves(message);
+        for(int i = 0; i < message.length(); i++){
+            Character key = message.charAt(i);
+            assertEquals(movesMap.get(key).getRotation(),moves[i].getRotation());
+            assertEquals(movesMap.get(key).getStep(),moves[i].getStep());
+        }
+        message = "LRLL";
+        moves = trans.string2moves(message);
+        for(int i = 0; i < message.length(); i++){
+            Character key = message.charAt(i);
+            assertEquals(movesMap.get(key).getRotation(),moves[i].getRotation());
+            assertEquals(movesMap.get(key).getStep(),moves[i].getStep());
+        }
+        message = "LLRMLRMLMMRMMLMRLMRLMRMMMLRMRLMRLMRLMRLMRLMMRLL";
+        moves = trans.string2moves(message);
+        for(int i = 0; i < message.length(); i++){
+            Character key = message.charAt(i);
+            assertEquals(movesMap.get(key).getRotation(),moves[i].getRotation());
+            assertEquals(movesMap.get(key).getStep(),moves[i].getStep());
+        }
+
+    }
+
+
+
+    @Test
     public void coordXY2string() throws Exception {
         HashMap<String,Coordinates> coordMap = new HashMap();
         coordMap.put("(0, 0, N)",new Coordinates(0,0,90));

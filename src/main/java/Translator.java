@@ -42,4 +42,31 @@ public class Translator {
         }
         return result;
     }
+
+    public Moves[] string2moves(String message){
+
+        Moves[] moves = new Moves[message.length()];
+        for(int i = 0; i < message.length(); i++){
+
+            switch (message.charAt(i)){
+                case 'M':
+                case 'm':
+                   moves[i] = new Moves(1,0);
+                   break;
+                case 'L':
+                case 'l':
+                    moves[i] = new Moves(0,90);
+                    break;
+                case 'R':
+                case 'r':
+                    moves[i] = new Moves(0,-90);
+                    break;
+                default:
+                    moves[i] = new Moves(0,0);
+            }
+        }
+        return moves;
+    }
+
+
 }
