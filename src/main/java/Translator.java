@@ -2,7 +2,7 @@ public class Translator {
     public Translator(){};
     public String coordXY2string(Coordinates coord){
         int[] xy = coord.getXYPosition();
-        String orientation = translateOrientation(coord.get_orientation());
+        String orientation = translateOrientation(coord.getOrientation());
 
         StringBuilder sb = new StringBuilder();
         sb.append("(");
