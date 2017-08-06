@@ -1,0 +1,13 @@
+challenge\Coordinates.class
+challenge\API.class
+challenge\ISurface.class
+challenge\Translator.class
+challenge\Moves.class
+challenge\Application.class
+challenge\ReceiverDefault.class
+challenge\IReceiver.class
+challenge\MarsSurface.class
+challenge\Robot.class
+challenge\ICoordinates.class
+challenge\InvalidInput.class
+challenge\ITranslator.class

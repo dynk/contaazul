@@ -1,3 +1,5 @@
+import challenge.Coordinates;
+import challenge.MarsSurface;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,3 +1,6 @@
+import challenge.Coordinates;
+import challenge.Moves;
+import challenge.Translator;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -11,7 +14,7 @@ public class TranslatorTest {
 
     @Test
     public void string2moves() throws Exception {
-        HashMap<Character,Moves> movesMap = new HashMap();
+        HashMap<Character, Moves> movesMap = new HashMap();
         movesMap.put('M', new Moves(1,0));
         movesMap.put('L', new Moves(0,90));
         movesMap.put('R', new Moves(0,-90));
@@ -44,7 +47,7 @@ public class TranslatorTest {
 
     @Test
     public void coordXY2string() throws Exception {
-        HashMap<String,Coordinates> coordMap = new HashMap();
+        HashMap<String, Coordinates> coordMap = new HashMap();
         coordMap.put("(0, 0, N)",new Coordinates(0,0,90));
         coordMap.put("(0, 0, N)",new Coordinates(0,0,-270));
         coordMap.put("(0, 2, W)",new Coordinates(0,2,180));
