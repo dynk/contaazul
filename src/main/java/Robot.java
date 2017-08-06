@@ -1,10 +1,10 @@
 public class Robot {
     private IReceiver _receiver;
     private Coordinates _gps;
-    private Translator _translator;
+    private ITranslator _translator;
     private ISurface _surface;
     private Moves[] _movements;
-    public Robot(IReceiver receiver, Translator translator, ISurface surface){
+    public Robot(IReceiver receiver, ITranslator translator, ISurface surface){
         _receiver = receiver;
 
         _translator = translator;
@@ -15,45 +15,63 @@ public class Robot {
     public void listenMessage(String message){
         _receiver.setReceivedMessage(message);
     }
-    public boolean isValidMessage(){
+    public boolean isValidMessage() throws InvalidInput{
+        if(!_receiver.isValidMessage()){
+            throw new InvalidInput("");
+        }
         return _receiver.isValidMessage();
     }
-    public void translateMessage(String message){
+    public void translateMessage(){
         _movements = _translator.string2moves(_receiver.getReceivedMessage());
     }
-    public String executeAll(String message) throws InvalidInput {
-        listenMessage(message);
-        if(!isValidMessage()){
-            throw new InvalidInput("400 Bad Request");
+    public String executeAll(String message){
+        try{
+            listenMessage(message);
+            isValidMessage();
+            translateMessage();
+            processRequest();
+            return _translator.coordXY2string(_gps);
+        }catch (Exception e){
+            return "400 Bad Request";
         }
-        translateMessage(message);
-        processRequest();
 
 
-        return "teste";
+//        listenMessage(message);
+//        if(!isValidMessage()){
+//            throw new InvalidInput("400 Bad Request");
+//        }
+//        translateMessage(message);
+//        processRequest();
+//
+//
+//        return "teste";
     }
-    public void processRequest()throws InvalidInput{
+    public void processRequest() throws InvalidInput{
         Coordinates desiredPosition;
-        Coordinates currentPosition = _gps;
+        Coordinates currentPosition = new Coordinates(_gps);
         int incX;
         int incY;
         for(Moves m:_movements){
             if(m.getStep() > 0){
-                incX = (int)Math.round(Math.sin(Math.toRadians(_gps.getOrientation())));
-                incY = (int)Math.round(Math.cos(Math.toRadians(_gps.getOrientation())));
-                desiredPosition = currentPosition;
+                incX = (int)Math.round(Math.cos(Math.toRadians(currentPosition.getOrientation())));
+                incY = (int)Math.round(Math.sin(Math.toRadians(currentPosition.getOrientation())));
+                desiredPosition = new Coordinates(currentPosition);
                 desiredPosition.incrementXY(incX,incY);
-                if(_surface.isLegalPosition(desiredPosition)){
-                    throw new InvalidInput("400 Bad Request");
+                if(!_surface.isLegalPosition(desiredPosition)){
+                    throw new InvalidInput("");
                 }else{
-                    currentPosition = desiredPosition;
+                    currentPosition = new Coordinates(desiredPosition);
                 }
             }
             if(m.getRotation() != 0){
-                _gps.setOrientation(m.getRotation());
+                currentPosition.incrementOrientation(m.getRotation());
             }
         }
-        _gps = currentPosition;
+        _gps = new Coordinates(currentPosition);
+    }
+
+    public String getPosition(){
+        return _translator.coordXY2string(_gps);
     }
 //    public String printPosition(){
 //

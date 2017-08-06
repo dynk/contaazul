@@ -1,4 +1,4 @@
-public class Translator {
+public class Translator implements ITranslator{
     public Translator(){};
     public String coordXY2string(Coordinates coord){
         int[] xy = coord.getXYPosition();

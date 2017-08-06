@@ -8,12 +8,21 @@ public class Coordinates {
         _y = y;
         _orientation = orientation;
     }
+    public Coordinates(Coordinates c){
+        int[] xy = c.getXYPosition();
+        _x = xy[0];
+        _y = xy[1];
+        _orientation = c.getOrientation();
+    }
     public void setXYPosition(int x, int y) {
         _x = x;
         _y = y;
     }
     public void setOrientation(int orientation){
         _orientation = orientation;
+    }
+    public void incrementOrientation(int orientation){
+        _orientation = (_orientation + orientation)%360;
     }
 
     public int getOrientation(){
@@ -29,6 +38,7 @@ public class Coordinates {
         _y = _y + y;
 
     }
+
 }
 
 
