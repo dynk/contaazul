@@ -1,6 +1,6 @@
 package challenge;
 
-public class Coordinates {
+public class Coordinates implements ICoordinates {
     private int _x;
     private int _y;
     private int _orientation;
@@ -10,13 +10,13 @@ public class Coordinates {
         _y = y;
         _orientation = orientation;
     }
-    public Coordinates(Coordinates c){
-        int[] xy = c.getXYPosition();
+    public Coordinates(ICoordinates c){
+        int[] xy = c.getPosition();
         _x = xy[0];
         _y = xy[1];
         _orientation = c.getOrientation();
     }
-    public void setXYPosition(int x, int y) {
+    public void setPosition(int x, int y) {
         _x = x;
         _y = y;
     }
@@ -31,14 +31,13 @@ public class Coordinates {
         return _orientation;
     }
 
-    public int[] getXYPosition() {
+    public int[] getPosition() {
         int[] xy = {_x,_y};
         return xy;
     }
-    public void incrementXY(int x, int y){
+    public void incrementPosition(int x, int y){
         _x = _x + x;
         _y = _y + y;
-
     }
 
 }

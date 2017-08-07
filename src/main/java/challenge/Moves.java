@@ -1,6 +1,6 @@
 package challenge;
 
-public class Moves {
+public class Moves implements IMoves {
     private int _step;
     private int _rotation;
 

@@ -2,8 +2,8 @@ package challenge;
 
 public class Translator implements ITranslator{
     public Translator(){};
-    public String coordXY2string(Coordinates coord){
-        int[] xy = coord.getXYPosition();
+    public String coordXY2string(ICoordinates coord){
+        int[] xy = coord.getPosition();
         String orientation = translateOrientation(coord.getOrientation());
 
         StringBuilder sb = new StringBuilder();
