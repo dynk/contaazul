@@ -5,11 +5,11 @@ public class Robot {
     private ICoordinates _gps;
     private ITranslator _translator;
     private ISurface _surface;
-    public Robot(IReceiver receiver, ITranslator translator, ISurface surface){
+    public Robot(IReceiver receiver, ITranslator translator, ISurface surface, ICoordinates coordinates){
         _receiver = receiver;
         _translator = translator;
         _surface = surface;
-        _gps = new Coordinates(0,0,90);
+        _gps = coordinates;
     }
 
     public void listenMessage(String message){

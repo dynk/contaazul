@@ -13,7 +13,8 @@ public class API {
         IReceiver receiver = new ReceiverDefault();
         ITranslator translator = new Translator();
         ISurface surface = new MarsSurface();
-        Robot robot = new Robot(receiver,translator,surface);
+        ICoordinates coordinates = new Coordinates(0,0,90);
+        Robot robot = new Robot(receiver,translator,surface, coordinates);
         String result = robot.executeAll(command);
 
         return result;

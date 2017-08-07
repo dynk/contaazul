@@ -15,7 +15,8 @@ public class RobotTest {
     IReceiver receiver = new ReceiverDefault();
     Translator translator = new Translator();
     ISurface surface = new MarsSurface();
-    Robot robot = new Robot(receiver,translator,surface);
+    ICoordinates coordinates = new Coordinates(0,0,90);
+    Robot robot = new Robot(receiver,translator,surface,coordinates);
 
 
 
@@ -56,7 +57,7 @@ public class RobotTest {
             String input = e.getKey();
             String output = e.getValue();
             String result;
-            Robot robot = new Robot(receiver,translator,surface);
+            Robot robot = new Robot(receiver,translator,surface,coordinates);
             result = robot.executeAll(input);
             assertEquals(output,result);
         }
@@ -74,7 +75,7 @@ public class RobotTest {
             String input = e.getKey();
             String output = e.getValue();
             String result;
-            Robot robot = new Robot(receiver,translator,surface);
+            Robot robot = new Robot(receiver,translator,surface, coordinates);
             result = robot.executeAll(input);
             assertEquals(output,result);
         }
