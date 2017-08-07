@@ -1,3 +1,5 @@
+package challenge;
+
 import challenge.*;
 import org.junit.Test;
 

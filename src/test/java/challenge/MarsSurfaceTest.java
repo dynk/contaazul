@@ -1,3 +1,5 @@
+package challenge;
+
 import challenge.Coordinates;
 import challenge.MarsSurface;
 import org.junit.Test;
@@ -6,6 +8,24 @@ import static org.junit.Assert.*;
 
 public class MarsSurfaceTest {
     MarsSurface mars = new MarsSurface();
+    @Test
+    public void getRobotFinalPosition() throws Exception {
+        Moves[] m = new Moves[3];
+        m[0] = new Moves(1,0);
+        m[1] = new Moves(0,-90);
+        m[2] = new Moves(1,0);
+        mars.setRobotMovements(m);
+        mars.moveRobot(new Coordinates(0,0,90));
+        Coordinates finalPosition = (Coordinates)mars.getRobotFinalPostion();
+        Coordinates expectedPosition = new Coordinates(1,1,0);
+        assertEquals(expectedPosition.getOrientation(), finalPosition.getOrientation());
+        assertEquals(expectedPosition.getPosition()[0], finalPosition.getPosition()[0]);
+        assertEquals(expectedPosition.getPosition()[1], finalPosition.getPosition()[1]);
+
+    }
+
+
+
     @Test
     public void isLegalPosition() throws Exception {
         Coordinates[] legalCoords = new Coordinates[3];
@@ -22,7 +42,6 @@ public class MarsSurfaceTest {
         for(Coordinates c: ilegalCoords){
             assertFalse(mars.isLegalPosition(c));
         }
-
 
     }
 

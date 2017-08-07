@@ -1,3 +1,5 @@
+package challenge;
+
 import challenge.Coordinates;
 import challenge.Moves;
 import challenge.Translator;

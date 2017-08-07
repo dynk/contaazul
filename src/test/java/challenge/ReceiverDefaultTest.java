@@ -1,3 +1,5 @@
+package challenge;
+
 import challenge.ReceiverDefault;
 import org.junit.Test;
 
